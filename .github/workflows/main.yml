@@ -57,12 +57,5 @@ jobs:
           TF_VAR_key_name: "backend-key"
           TF_VAR_public_key: "$PUBLIC_KEY"
 
-      - name: Upload SSH Private Key to GitHub Artifacts (Optional)
-        uses: actions/upload-artifact@v3
-        with:
-          name: backend-key
-          path: backend-key
-          retention-days: 1  # Keep key for 1 day
-
       - name: Cleanup SSH Keys
         run: rm -f backend-key backend-key.pub ~/.ssh/backend-key
