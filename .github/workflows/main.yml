@@ -30,8 +30,9 @@ jobs:
       - name: Generate SSH Key Pair
         run: |
           ssh-keygen -t rsa -b 4096 -C "github-action-key" -f backend-key -N ""
-          echo "PUBLIC_KEY=$(cat backend-key.pub | base64 -w 0)" >> $GITHUB_ENV
-          echo "PRIVATE_KEY=$(cat backend-key | base64 -w 0)" >> $GITHUB_ENV
+          echo "TF_VAR_PUBLIC_KEY=$(cat backend-key.pub | base64 -w 0)" >> $GITHUB_ENV
+          echo "TF_VAR_private_key=$(cat backend-key | base64 -w 0)" >> $GITHUB_ENV
+      
       
 
       - name: Store Private Key Securely
