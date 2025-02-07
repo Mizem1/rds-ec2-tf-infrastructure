@@ -2,79 +2,37 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# 🚀 Terraform + AWS + GitHub Actions CI/CD
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This project automates the deployment of **AWS infrastructure** using **Terraform** and **GitHub Actions**. The architecture includes:
+- **VPC with public and private subnets**
+- **EC2 Instance for Compute**
+- **RDS PostgreSQL (Private Subnet)**
+- **Terraform remote state stored in S3 & DynamoDB**
+- **GitHub Actions for automated deployments**
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🏗 **Infrastructure Overview**
+The infrastructure is built using **Terraform modules**:
 
-## Installation
+| Component      | Technology  | Description |
+|---------------|------------|-------------|
+| **Compute**   | AWS EC2     | Backend server running on **Ubuntu 20.04** |
+| **Database**  | AWS RDS     | PostgreSQL 16 database in a **private subnet** |
+| **Network**   | AWS VPC     | Custom VPC with **public & private subnets, security groups, and routing** |
+| **State**     | AWS S3 + DynamoDB | Remote state storage for Terraform |
+| **CI/CD**     | GitHub Actions | Automates infrastructure deployment on every **push to `main`** |
 
-```bash
-$ npm install
-```
+---
 
-## Running the app
+## 🛠 **Functional backend**
+The REST API is a simple backend to use and test the Terraform & AWS infrastructure in which runs a migration to automate the DB
 
-```bash
-# development
-$ npm run start
+![images/migrations.png](images/migrations.png)
 
-# watch mode
-$ npm run start:dev
+And exposes the POST & GET /cities endpoint to add a city and get all of them
 
-# production mode
-$ npm run start:prod
-```
+![images/backend.png](images/backend.png)
 
-## Test
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
-
-Creacion de Backend S3 states
-cd terraform
-terraform init
-terraform apply -target=module.backend -auto-approve
-
-terraform init -migrate-state
