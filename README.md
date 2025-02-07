@@ -76,5 +76,5 @@ Creacion de Backend S3 states
 cd terraform
 terraform init
 terraform apply -target=module.backend -auto-approve
-"# cautious-octo-waffle" 
-"# rds-ec2-tf-infrastructure" 
+
+terraform init -migrate-state
