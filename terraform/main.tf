@@ -14,6 +14,7 @@ module "compute" {
   subnet_id         = module.network.public_subnet_id
   security_group_id = module.network.ec2_security_group_id
   key_name          = "backend-key"
+  public_key = var.PUBLIC_KEY
 }
 
 module "databases" {

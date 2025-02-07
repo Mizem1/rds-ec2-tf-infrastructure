@@ -30,14 +30,16 @@ jobs:
       - name: Generate SSH Key Pair
         run: |
           ssh-keygen -t rsa -b 4096 -C "github-action-key" -f backend-key -N ""
-          echo "PUBLIC_KEY=$(cat backend-key.pub)" >> $GITHUB_ENV
-          echo "PRIVATE_KEY=$(cat backend-key)" >> $GITHUB_ENV
+          echo "PUBLIC_KEY=$(cat backend-key.pub | base64 -w 0)" >> $GITHUB_ENV
+          echo "PRIVATE_KEY=$(cat backend-key | base64 -w 0)" >> $GITHUB_ENV
+      
 
       - name: Store Private Key Securely
         run: |
-          mkdir -p ~/.ssh
-          echo "$PRIVATE_KEY" > ~/.ssh/backend-key
-          chmod 400 ~/.ssh/backend-key
+            mkdir -p ~/.ssh
+            echo "$PRIVATE_KEY" | base64 -d > ~/.ssh/backend-key
+            chmod 400 ~/.ssh/backend-key
+        
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -55,7 +57,8 @@ jobs:
         run: terraform apply -auto-approve -input=false
         env:
           TF_VAR_key_name: "backend-key"
-          TF_VAR_public_key: "$PUBLIC_KEY"
+          TF_VAR_PUBLIC_KEY: "$PUBLIC_KEY"
+
 
       - name: Cleanup SSH Keys
         run: rm -f backend-key backend-key.pub ~/.ssh/backend-key

@@ -14,4 +14,9 @@ variable "PASSWORD" {
   sensitive   = true
 }
 
+variable "PUBLIC_KEY" {
+  description = "Public key for SSH access"
+  type        = string
+}
+
 
