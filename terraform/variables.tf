@@ -3,12 +3,12 @@ variable "DB_NAME" {
   type        = string
 }
 
-variable "USERNAME" {
+variable "DB_USERNAME" {
   description = "Database admin username"
   type        = string
 }
 
-variable "PASSWORD" {
+variable "DB_PASSWORD" {
   description = "Database admin password"
   type        = string
   sensitive   = true

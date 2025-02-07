@@ -20,8 +20,8 @@ module "compute" {
 module "databases" {
   source               = "./modules/databases"
   db_name              = var.DB_NAME
-  username             = var.USERNAME
-  password             = var.PASSWORD
+  username             = var.DB_USERNAME
+  password             = var.DB_PASSWORD
   allocated_storage    = 20
   max_allocated_storage = 20
   engine_version       = "16"
