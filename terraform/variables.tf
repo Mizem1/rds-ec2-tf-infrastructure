@@ -14,7 +14,7 @@ variable "DB_PASSWORD" {
   sensitive   = true
 }
 
-variable "PUBLIC_KEY" {
+variable "public_key" {
   description = "Public key for SSH access"
   type        = string
 }
