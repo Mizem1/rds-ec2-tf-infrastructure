@@ -61,8 +61,8 @@ jobs:
         env:
           TF_VAR_key_name: "backend-key"
           TF_VAR_DB_NAME: ${{ secrets.TF_VAR_DB_NAME }}
-          TF_VAR_DB_USERNAME: ${{ secrets.TF_VAR_DB_USERNAME }}
-          TF_VAR_DB_PASSWORD: ${{ secrets.TF_VAR_DB_PASSWORD }}
+          TF_VAR_DB_USERNAME: ${{ secrets.TF_VAR_USERNAME }}
+          TF_VAR_DB_PASSWORD: ${{ secrets.TF_VAR_PASSWORD }}
       
 
 
